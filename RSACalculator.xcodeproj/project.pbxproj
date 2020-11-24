@@ -52,8 +52,9 @@
 		60DF2EB6256CA82000F595D4 /* RSACalculator */ = {
 			isa = PBXGroup;
 			children = (
+				60DF2ECA256CAFAD00F595D4 /* Models */,
+				60DF2EC8256CAE4500F595D4 /* Views */,
 				60DF2EB7256CA82000F595D4 /* RSACalculatorApp.swift */,
-				60DF2EB9256CA82000F595D4 /* ContentView.swift */,
 				60DF2EBB256CA82100F595D4 /* Assets.xcassets */,
 				60DF2EC0256CA82100F595D4 /* Info.plist */,
 				60DF2EBD256CA82100F595D4 /* Preview Content */,
@@ -67,6 +68,21 @@
 				60DF2EBE256CA82100F595D4 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		60DF2EC8256CAE4500F595D4 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				60DF2EB9256CA82000F595D4 /* ContentView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		60DF2ECA256CAFAD00F595D4 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
