@@ -11,7 +11,7 @@ import SwiftUI
 struct RSACalculatorApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            RSACalculatorView(viewModel: RSACalculatorViewModel())
         }
     }
 }
