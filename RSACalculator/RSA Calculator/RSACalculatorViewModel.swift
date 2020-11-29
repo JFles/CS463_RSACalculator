@@ -13,6 +13,12 @@ final class RSACalculatorViewModel : ObservableObject {
     @Published var q = ""
     @Published var n = ""
     @Published var r = ""
+    @Published var kValues = ["5", "7", "9", "5", "7", "9", "5", "7", "9", "5", "7", "9",
+                              "5", "7", "9", "5", "7", "9", "5", "7", "9", "5", "7", "9",
+                              "5", "7", "9", "5", "7", "9", "5", "7", "9", "5", "7", "9"]//[String]()
+
+    #warning("Add a parsing method to process K into a local array of values")
+    #warning("Add drop-down for selecting valid K values")
 
     func primeCheck() -> Bool {
         guard let p = Int(p),

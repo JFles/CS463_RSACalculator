@@ -45,6 +45,7 @@ struct RSACalculatorView: View {
                     ///         - The const form (e.g. `((35, 7), 103)`)
                     ///
 
+                    StepTwo(viewModel: viewModel)
 
                     /// # Step 3.1
                     /// Enter message `m` to encrypt

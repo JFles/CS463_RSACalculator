@@ -9,6 +9,7 @@ import SwiftUI
 
 struct StepOne: View {
     @ObservedObject var viewModel: RSACalculatorViewModel
+    @State var selectedK = 0
 
     var body: some View {
         /// # Step 1.1
@@ -44,18 +45,61 @@ struct StepOne: View {
 
         LabeledValueEntry(label: "r = (p - 1) * (q - 1)", placeholder: "r", input: $viewModel.r)
 
+        SelectKSection(viewModel: viewModel, selectedK: selectedK)
 
-        /// # Step 1.4
-        /// Display valid K value candidates
-        #warning("Should this only display the K values that meet both requirements?")
-        /// `K = (e * d) == 1 mod r`
-        ///
     }
 }
 
 struct StepOne_Previews: PreviewProvider {
     static var previews: some View {
-        StepOne(viewModel: RSACalculatorViewModel())
-            .previewLayout(.sizeThatFits)
+//        StepOne(viewModel: RSACalculatorViewModel())
+//            .previewLayout(.sizeThatFits)
+
+        RSACalculatorView(viewModel: RSACalculatorViewModel())
+    }
+}
+
+struct SelectKSection: View {
+    @ObservedObject var viewModel: RSACalculatorViewModel
+    @State var selectedK: Int
+
+    var body: some View {
+        /// # Step 1.4
+        /// Display valid K value candidates
+        #warning("Should this only display the K values that meet both requirements?")
+        /// `K = (e * d) == 1 mod r`
+        ///
+
+        // How should K display?
+        // should this be a dropdown of precalculated valid K candidate values?
+
+        // If user selects a K val
+        // Then populate `e` and `d`
+
+        // How should the calcs be shown?
+        #warning("Reformat this to better instruct what K is for")
+        Text("Select a valid K value to determine e and d")
+            .padding(.horizontal, 50)
+            .padding(.top, 20)
+            .font(.title3)
+            .multilineTextAlignment(.center)
+
+        VStack {
+            HStack {
+                Text("K = (e * d) == 1 mod r")
+                Spacer()
+            }
+
+            #warning("Add a dropdown with valid K values prepopulated")
+            Picker("Select K Value", selection: $selectedK, content: {
+                ForEach(0..<viewModel.kValues.count) { index in
+                    Text(viewModel.kValues[index])
+                        .tag(index)
+                }
+            }).pickerStyle(MenuPickerStyle())
+        }.padding()
+
+        #warning("Replace this with a button to go to the next step")
+        Text("Selected K: \(viewModel.kValues[selectedK])")
     }
 }
