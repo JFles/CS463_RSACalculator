@@ -40,10 +40,10 @@ struct StepOne: View {
 
         /// Present calculated `N` and `r`
         ///
-        #warning("Should these be changed from TextFields to be some non-user-interactable UI element?")
-        LabeledValueEntry(label: "N = p * q", placeholder: "N", input: $viewModel.n)
+        ValueLabel(label: "N = p * q", input: $viewModel.n)
+            .padding(.bottom, 10)
 
-        LabeledValueEntry(label: "r = (p - 1) * (q - 1)", placeholder: "r", input: $viewModel.r)
+        ValueLabel(label: "r = (p - 1) * (q - 1)", input: $viewModel.r)
 
         SelectKSection(viewModel: viewModel, selectedK: selectedK)
 
@@ -70,36 +70,31 @@ struct SelectKSection: View {
         /// `K = (e * d) == 1 mod r`
         ///
 
-        // How should K display?
-        // should this be a dropdown of precalculated valid K candidate values?
-
-        // If user selects a K val
-        // Then populate `e` and `d`
-
-        // How should the calcs be shown?
-        #warning("Reformat this to better instruct what K is for")
-        Text("Select a valid K value to determine e and d")
-            .padding(.horizontal, 50)
-            .padding(.top, 20)
-            .font(.title3)
-            .multilineTextAlignment(.center)
-
         VStack {
+            Text("Select a valid K value to determine e and d")
+                .fixedSize(horizontal: false, vertical: true)
+                .padding(.horizontal, 50)
+                .padding(.vertical, 10)
+                .font(.title3)
+                .multilineTextAlignment(.center)
+
             HStack {
                 Text("K = (e * d) == 1 mod r")
                 Spacer()
             }
 
-            #warning("Add a dropdown with valid K values prepopulated")
             Picker("Select K Value", selection: $selectedK, content: {
                 ForEach(0..<viewModel.kValues.count) { index in
                     Text(viewModel.kValues[index])
                         .tag(index)
                 }
             }).pickerStyle(MenuPickerStyle())
+
+            HStack {
+                Text("K = \(viewModel.kValues[selectedK])")
+                Spacer()
+            }
         }.padding()
 
-        #warning("Replace this with a button to go to the next step")
-        Text("Selected K: \(viewModel.kValues[selectedK])")
     }
 }

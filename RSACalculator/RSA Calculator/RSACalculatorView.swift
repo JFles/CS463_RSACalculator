@@ -20,31 +20,6 @@ struct RSACalculatorView: View {
 
                     StepOne(viewModel: viewModel)
 
-
-                    /// # Step 2.1
-                    /// Choose public key `e`
-                    /// `e` must be:
-                    ///     - one of the cofactors of `k`
-                    ///     - less than *and* coprime to `r = (p - 1)(q - 1)`
-                    ///
-
-
-                    /// # Step 2.2
-                    /// Choose private key `d`
-                    /// `d` must be:
-                    ///     - one of the cofactors of `k`
-                    ///     - such that `e * d == 1 mod r`
-                    ///
-
-
-                    /// # Step 2.3
-                    /// Display RSA Keypair
-                    ///  `((N, e), d)`
-                    ///     - Include in UI:
-                    ///         - The variable form (e.g. `((N, e), d)`)
-                    ///         - The const form (e.g. `((35, 7), 103)`)
-                    ///
-
                     StepTwo(viewModel: viewModel)
 
                     /// # Step 3.1
