@@ -16,6 +16,7 @@
 		606A55BD25746D1A00F5806F /* MessageHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 606A55BC25746D1A00F5806F /* MessageHeader.swift */; };
 		606A55C02574765800F5806F /* StepThree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 606A55BF2574765800F5806F /* StepThree.swift */; };
 		606A55C3257476D700F5806F /* StepFour.swift in Sources */ = {isa = PBXBuildFile; fileRef = 606A55C2257476D700F5806F /* StepFour.swift */; };
+		606A55C7257484AE00F5806F /* UIApplication+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 606A55C6257484AD00F5806F /* UIApplication+Ext.swift */; };
 		60D41BC7256F56CB009F27DD /* RSACalculatorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D41BC6256F56CB009F27DD /* RSACalculatorViewModel.swift */; };
 		60D41BCA256F56F4009F27DD /* RSACalculatorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D41BC9256F56F4009F27DD /* RSACalculatorModel.swift */; };
 		60DF2EB8256CA82000F595D4 /* RSACalculatorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DF2EB7256CA82000F595D4 /* RSACalculatorApp.swift */; };
@@ -34,6 +35,7 @@
 		606A55BC25746D1A00F5806F /* MessageHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageHeader.swift; sourceTree = "<group>"; };
 		606A55BF2574765800F5806F /* StepThree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepThree.swift; sourceTree = "<group>"; };
 		606A55C2257476D700F5806F /* StepFour.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepFour.swift; sourceTree = "<group>"; };
+		606A55C6257484AD00F5806F /* UIApplication+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Ext.swift"; sourceTree = "<group>"; };
 		60D41BC6256F56CB009F27DD /* RSACalculatorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSACalculatorViewModel.swift; sourceTree = "<group>"; };
 		60D41BC9256F56F4009F27DD /* RSACalculatorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSACalculatorModel.swift; sourceTree = "<group>"; };
 		60DF2EB4256CA82000F595D4 /* RSACalculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RSACalculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -78,6 +80,14 @@
 			path = "Step Views";
 			sourceTree = "<group>";
 		};
+		606A55C52574849500F5806F /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				606A55C6257484AD00F5806F /* UIApplication+Ext.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		60DF2EAB256CA82000F595D4 = {
 			isa = PBXGroup;
 			children = (
@@ -117,6 +127,7 @@
 		60DF2EC8256CAE4500F595D4 /* RSA Calculator */ = {
 			isa = PBXGroup;
 			children = (
+				606A55C52574849500F5806F /* Helpers */,
 				606A55B12574374400F5806F /* Step Views */,
 				606A55A4257432F500F5806F /* Component Views */,
 				60DF2EB9256CA82000F595D4 /* RSACalculatorView.swift */,
@@ -205,6 +216,7 @@
 				606A55C3257476D700F5806F /* StepFour.swift in Sources */,
 				60DF2EB8256CA82000F595D4 /* RSACalculatorApp.swift in Sources */,
 				606A55BD25746D1A00F5806F /* MessageHeader.swift in Sources */,
+				606A55C7257484AE00F5806F /* UIApplication+Ext.swift in Sources */,
 				60D41BC7256F56CB009F27DD /* RSACalculatorViewModel.swift in Sources */,
 				606A55B42574377700F5806F /* StepOne.swift in Sources */,
 				606A55A8257434E400F5806F /* TitleView.swift in Sources */,

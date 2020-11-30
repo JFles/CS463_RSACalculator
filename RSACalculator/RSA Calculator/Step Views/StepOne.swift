@@ -31,6 +31,7 @@ struct StepOne: View {
             action: {
                 viewModel.calcN()
                 viewModel.calcR()
+                UIApplication.shared.endEditing()
             },
             label: {
                 Text("Calculate N and r") }
