@@ -15,8 +15,6 @@ struct ValueLabel: View {
         HStack {
             Text("\(label) = \(input)")
             Spacer()
-        }
-//        .padding()
-        .padding(.leading, 20)
+        }.padding(.leading, 20)
     }
 }

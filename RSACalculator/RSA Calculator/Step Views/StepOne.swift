@@ -66,17 +66,11 @@ struct SelectKSection: View {
     var body: some View {
         /// # Step 1.4
         /// Display valid K value candidates
-        #warning("Should this only display the K values that meet both requirements?")
         /// `K = (e * d) == 1 mod r`
         ///
 
         VStack {
-            Text("Select a valid K value to determine e and d")
-                .fixedSize(horizontal: false, vertical: true)
-                .padding(.horizontal, 50)
-                .padding(.vertical, 10)
-                .font(.title3)
-                .multilineTextAlignment(.center)
+            MessageHeader(message: "Select a valid K value to determine e and d")
 
             HStack {
                 Text("K = (e * d) == 1 mod r")
@@ -95,6 +89,5 @@ struct SelectKSection: View {
                 Spacer()
             }
         }.padding()
-
     }
 }

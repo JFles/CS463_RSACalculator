@@ -12,7 +12,7 @@ struct StepTwo: View {
 
     var body: some View {
         StepHeader(step: "Step 2")
-            .padding(.top, 20)
+            .padding(.vertical, 10)
 
         /// # Step 2.1
         /// Choose public key `e`
@@ -21,6 +21,9 @@ struct StepTwo: View {
         ///     - less than *and* coprime to `r = (p - 1)(q - 1)`
         ///
 
+        MessageHeader(message: "Public key, e, is a positive integer which is a cofactor of K and it must be less than and coprime to r")
+
+        ValueLabel(label: "e", input: $viewModel.e)
 
         /// # Step 2.2
         /// Choose private key `d`
@@ -29,6 +32,10 @@ struct StepTwo: View {
         ///     - such that `e * d == 1 mod r`
         ///
 
+        #warning("Consider breaking the formula out into a separate Text")
+        MessageHeader(message: "Private key, d, is a positive integer which is a cofactor of K and must be coprime to r and satisfy `e * d == 1 mod r`")
+
+        ValueLabel(label: "d", input: $viewModel.d)
 
         /// # Step 2.3
         /// Display RSA Keypair
@@ -38,6 +45,15 @@ struct StepTwo: View {
         ///         - The const form (e.g. `((35, 7), 103)`)
         ///
 
+        MessageHeader(message: "The calculated RSA Keypair appears in the following format:")
+
+        Text("((N, e), d)").italic()
+
+        MessageHeader(message: "Where N is the modulus used for encryption and decryption")
+
+        MessageHeader(message: "The RSA Keypair for this session is as follows:")
+
+        Text("((\(viewModel.n), \(viewModel.e), \(viewModel.d))")
     }
 }
 

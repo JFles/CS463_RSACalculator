@@ -9,13 +9,16 @@ import SwiftUI
 import Combine
 
 final class RSACalculatorViewModel : ObservableObject {
+    #warning("Can these be changed to an int type?")
     @Published var p = ""
     @Published var q = ""
-    @Published var n = ""
-    @Published var r = ""
+    @Published var n = "?"
+    @Published var r = "?"
     @Published var kValues = ["5", "7", "9", "5", "7", "9", "5", "7", "9", "5", "7", "9",
                               "5", "7", "9", "5", "7", "9", "5", "7", "9", "5", "7", "9",
                               "5", "7", "9", "5", "7", "9", "5", "7", "9", "5", "7", "9"]//[String]()
+    @Published var e = "?"
+    @Published var d = "?"
 
     #warning("Add algorithm to determine K values and replace hardcoded values")
 
