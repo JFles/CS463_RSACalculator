@@ -12,6 +12,7 @@ struct StepThree: View {
 
     var body: some View {
         StepHeader(step: "Step 3")
+            .padding(.vertical, 10)
 
         /// # Step 3.1
         /// Enter message `m` to encrypt
@@ -19,12 +20,30 @@ struct StepThree: View {
         ///     - a positive integer `m` where `1 < m < N`
         ///
 
+        MessageHeader(message: "Messages are represented as positive integers for encryption and decryption. The message, m, must satisfy `1 < m < N`")
+
+        LabeledValueEntry(label: "Message m:", placeholder: "Enter a positive number", input: $viewModel.m)
+
 
         /// # Step 3.2
         /// Compute ciphertext `c`
         /// `c = m^e mod N`
         ///     - Note, this requires Bob's public key `(N, e)`
         ///
+
+        MessageHeader(message: "The message, m, is encrypted with the following formula to produce ciphertext, c:")
+
+        Text("c = m^e mod N").italic()
+
+        Button(
+            action: {
+                //                viewModel.calcN()
+                //                viewModel.calcR()
+            },
+            label: {
+                Text("Encrypt m") }
+        )
+        .padding()
     }
 }
 
