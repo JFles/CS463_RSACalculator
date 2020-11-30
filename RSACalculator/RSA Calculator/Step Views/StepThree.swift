@@ -12,7 +12,6 @@ struct StepThree: View {
 
     var body: some View {
         StepHeader(step: "Step 3")
-            .padding(.vertical, 10)
 
         /// # Step 3.1
         /// Enter message `m` to encrypt
@@ -22,7 +21,7 @@ struct StepThree: View {
 
         MessageHeader(message: "Messages are represented as positive integers for encryption and decryption. The message, m, must satisfy `1 < m < N`")
 
-        LabeledValueEntry(label: "Message m:", placeholder: "Enter a positive number", input: $viewModel.m)
+        LabeledValueEntry(label: "Message m:", placeholder: "Enter a positive number", input: $viewModel.mInput)
 
 
         /// # Step 3.2
@@ -44,6 +43,8 @@ struct StepThree: View {
                 Text("Encrypt m") }
         )
         .padding()
+
+        ValueLabel(label: "c", input: $viewModel.c)
     }
 }
 

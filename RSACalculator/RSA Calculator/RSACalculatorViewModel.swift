@@ -19,7 +19,8 @@ final class RSACalculatorViewModel : ObservableObject {
                               "5", "7", "9", "5", "7", "9", "5", "7", "9", "5", "7", "9"]//[String]()
     @Published var e = "?"
     @Published var d = "?"
-    @Published var m = ""
+    @Published var mInput = ""
+    @Published var mOutput = "?"
     @Published var c = "?"
 
     #warning("Add algorithm to determine K values and replace hardcoded values")

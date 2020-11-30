@@ -16,6 +16,22 @@ struct StepFour: View {
         /// # Step 4.1
         /// Compute `m` from given ciphertext `c`
         /// `m = c^d mod N`
+
+        MessageHeader(message: "The ciphertext, c, is decrypted with the following formula to produce message, m:")
+
+        Text("m = c^d mod N").italic()
+
+        Button(
+            action: {
+                //                viewModel.calcN()
+                //                viewModel.calcR()
+            },
+            label: {
+                Text("Decrypt c") }
+        )
+        .padding()
+
+        ValueLabel(label: "m", input: $viewModel.mOutput)
     }
 }
 

@@ -15,9 +15,10 @@ struct StepHeader: View {
             Text(step)
                 .font(.title2)
                 .underline()
-//                .italic()
 
             Spacer()
-        }.padding(.leading, 20)
+        }
+        .padding(.leading, 20)
+        .padding(.vertical, 10)
     }
 }

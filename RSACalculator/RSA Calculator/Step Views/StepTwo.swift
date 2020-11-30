@@ -12,7 +12,6 @@ struct StepTwo: View {
 
     var body: some View {
         StepHeader(step: "Step 2")
-            .padding(.vertical, 10)
 
         /// # Step 2.1
         /// Choose public key `e`

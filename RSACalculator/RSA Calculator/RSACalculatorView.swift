@@ -16,7 +16,7 @@ struct RSACalculatorView: View {
                 StepOne(viewModel: viewModel)
                 StepTwo(viewModel: viewModel)
                 StepThree(viewModel: viewModel)
-//                StepFour(viewModel: viewModel)
+                StepFour(viewModel: viewModel)
                 Spacer()
             }
         }
