@@ -14,6 +14,7 @@ final class RSACalculatorViewModel : ObservableObject {
     @Published var q = ""
     @Published var n = "?"
     @Published var r = "?"
+    #warning("Consider removing K values and instead offer key pairs in drop down")
     @Published var kValues = ["5", "7", "9", "5", "7", "9", "5", "7", "9", "5", "7", "9",
                               "5", "7", "9", "5", "7", "9", "5", "7", "9", "5", "7", "9",
                               "5", "7", "9", "5", "7", "9", "5", "7", "9", "5", "7", "9"]//[String]()
@@ -22,6 +23,8 @@ final class RSACalculatorViewModel : ObservableObject {
     @Published var mInput = ""
     @Published var mOutput = "?"
     @Published var c = "?"
+
+    var keyPairs = [(Int, Int)]()
 
     #warning("Add algorithm to determine K values and replace hardcoded values")
 
@@ -51,5 +54,40 @@ final class RSACalculatorViewModel : ObservableObject {
               let q = Int(q) else { return }
 
         r = String((p - 1) * (q - 1))
+    }
+
+    #warning("Might be redundant -- consider removing")
+    func rgcd(a: Int, b: Int) -> Int {
+        if b == 0 { return a }
+        return rgcd(a: b, b: a % b)
+    }
+
+    func modInverse(a: Int, m: Int) -> Int? {
+        let tmp = a % m
+        for i in 1..<m {
+            if (tmp * i % m == 1) {
+                return i;
+            }
+        }
+        return nil
+    }
+
+    func validateFactors(_ e: Int, _ d: Int, _ r: Int) -> Bool {
+        guard e > 1 && e < r else { return false }
+        guard d > 1 else { return false }
+        #warning("rgcd checks might be redundant")
+        guard rgcd(a: e, b: r) == 1 else { return false }
+        guard rgcd(a: d, b: r) == 1 else { return false }
+        return true
+    }
+
+    func computeKeyPairs(r: Int, maxKey: Int) {
+        for d in 2...maxKey {
+            if let e = modInverse(a: d, m: r) {
+                if validateFactors(e, d, r) {
+                    keyPairs.append((e, d))
+                }
+            }
+        }
     }
 }
