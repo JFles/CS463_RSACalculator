@@ -8,25 +8,22 @@
 import SwiftUI
 import Combine
 
+let MaxKey = 100
+
 final class RSACalculatorViewModel : ObservableObject {
     #warning("Can these be changed to an int type?")
     @Published var p = ""
     @Published var q = ""
     @Published var n = "?"
     @Published var r = "?"
-    #warning("Consider removing K values and instead offer key pairs in drop down")
-    @Published var kValues = ["5", "7", "9", "5", "7", "9", "5", "7", "9", "5", "7", "9",
-                              "5", "7", "9", "5", "7", "9", "5", "7", "9", "5", "7", "9",
-                              "5", "7", "9", "5", "7", "9", "5", "7", "9", "5", "7", "9"]//[String]()
+    @Published var kValues = [String]()
+    private var keyPairs = [(Int, Int)]()
     @Published var e = "?"
     @Published var d = "?"
     @Published var mInput = ""
     @Published var mOutput = "?"
     @Published var c = "?"
 
-    var keyPairs = [(Int, Int)]()
-
-    #warning("Add algorithm to determine K values and replace hardcoded values")
 
     func primeCheck() -> Bool {
         guard let p = Int(p),
@@ -54,6 +51,24 @@ final class RSACalculatorViewModel : ObservableObject {
               let q = Int(q) else { return }
 
         r = String((p - 1) * (q - 1))
+    }
+
+    func calcKVals() {
+        guard let r = Int(r) else { return }
+        kValues = []
+        keyPairs = []
+
+        computeKeyPairs(r: r, maxKey: MaxKey)
+
+        for pair in keyPairs {
+            let product = pair.0 * pair.1
+            kValues.append(String(product))
+        }
+    }
+
+    func getKValFactors(index: Int) {
+        e = String(keyPairs[index].0)
+        d = String(keyPairs[index].1)
     }
 
     #warning("Might be redundant -- consider removing")

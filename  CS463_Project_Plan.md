@@ -29,10 +29,6 @@
             - `d` is the *private* exponent
                 - such that `ed ≡ 1 mod r`
 
-### 
-
-
-
 
 ## RSA Calculator Implementation
 ### Step 1 - Prework

@@ -52,7 +52,7 @@ struct StepTwo: View {
 
         MessageHeader(message: "The RSA Keypair for this session is as follows:")
 
-        Text("((\(viewModel.n), \(viewModel.e), \(viewModel.d))")
+        Text("((\(viewModel.n), \(viewModel.e)), \(viewModel.d))")
     }
 }
 

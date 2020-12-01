@@ -10,6 +10,7 @@ import SwiftUI
 struct StepOne: View {
     @ObservedObject var viewModel: RSACalculatorViewModel
     @State var selectedK = 0
+    @State private var showingAlert = false
 
     var body: some View {
         /// # Step 1.1
@@ -29,13 +30,20 @@ struct StepOne: View {
         ///
         Button(
             action: {
-                viewModel.calcN()
-                viewModel.calcR()
+                if viewModel.primeCheck() {
+                    viewModel.calcN()
+                    viewModel.calcR()
+                    viewModel.calcKVals()
+                } else {
+                    self.showingAlert = true
+                }
                 UIApplication.shared.endEditing()
             },
             label: {
                 Text("Calculate N and r") }
-        )
+        ).alert(isPresented: $showingAlert) {
+            Alert(title: Text("Non-prime number detected!"), message: Text("Try entering a prime number for both p and q"), dismissButton: .default(Text("OK")))
+        }
         .padding()
 
 
@@ -46,8 +54,21 @@ struct StepOne: View {
 
         ValueLabel(label: "r = (p - 1) * (q - 1)", input: $viewModel.r)
 
-        SelectKSection(viewModel: viewModel, selectedK: selectedK)
+        SelectKSection(viewModel: viewModel, selectedK: $selectedK)
 
+        if !viewModel.kValues.isEmpty {
+            Button(action: {
+                viewModel.getKValFactors(index: selectedK)
+            }, label: {
+                Text("Get Factors of K")
+            })
+
+            HStack {
+                Text("K = \(viewModel.e) * \(viewModel.d)")
+
+                Spacer()
+            }.padding(.leading, 20)
+        }
     }
 }
 
@@ -62,33 +83,38 @@ struct StepOne_Previews: PreviewProvider {
 
 struct SelectKSection: View {
     @ObservedObject var viewModel: RSACalculatorViewModel
-    @State var selectedK: Int
+    @Binding var selectedK: Int
 
     var body: some View {
         /// # Step 1.4
         /// Display valid K value candidates
         /// `K = (e * d) == 1 mod r`
         ///
+        MessageHeader(message: "Select a valid K value to determine e and d")
 
-        VStack {
-            MessageHeader(message: "Select a valid K value to determine e and d")
+        HStack {
+            Text("K = (e * d) == 1 mod r")
+            Spacer()
+        }.padding()
 
-            HStack {
-                Text("K = (e * d) == 1 mod r")
-                Spacer()
-            }
-
+        if !viewModel.kValues.isEmpty {
             Picker("Select K Value", selection: $selectedK, content: {
                 ForEach(0..<viewModel.kValues.count) { index in
                     Text(viewModel.kValues[index])
                         .tag(index)
                 }
             }).pickerStyle(MenuPickerStyle())
+            .padding()
+        }
 
-            HStack {
-                Text("K = \(viewModel.kValues[selectedK])")
-                Spacer()
+        HStack {
+            if viewModel.kValues.isEmpty {
+                Text("K = ?")
+            } else {
+                Text("K = \(viewModel.kValues[selectedK]) == 1 mod \(viewModel.r)")
             }
+
+            Spacer()
         }.padding()
     }
 }
