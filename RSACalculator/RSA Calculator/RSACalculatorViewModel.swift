@@ -6,9 +6,9 @@
 //
 
 import SwiftUI
-import Combine
+import BigInt
 
-let MaxKey = 100
+let MaxKey: BigInt = 100
 
 final class RSACalculatorViewModel : ObservableObject {
     #warning("Can these be changed to an int type?")
@@ -17,7 +17,7 @@ final class RSACalculatorViewModel : ObservableObject {
     @Published var n = "?"
     @Published var r = "?"
     @Published var kValues = [String]()
-    private var keyPairs = [(Int, Int)]()
+    private var keyPairs = [(BigInt, BigInt)]()
     @Published var e = "?"
     @Published var d = "?"
     @Published var mInput = ""
@@ -26,38 +26,42 @@ final class RSACalculatorViewModel : ObservableObject {
 
 
     func primeCheck() -> Bool {
-        guard let p = Int(p),
-              let q = Int(q) else { return false }
+        guard let p = BigInt(p),
+              let q = BigInt(q) else { return false }
 
         return isPrime(p) && isPrime(q)
     }
 
-    func isPrime(_ n: Int) -> Bool {
-        guard n >= 2     else { return false }
-        guard n != 2     else { return true  }
-        guard n % 2 != 0 else { return false }
-        return !stride(from: 3, through: Int(sqrt(Double(n))), by: 2).contains { n % $0 == 0 }
+    func isPrime(_ n: BigInt) -> Bool {
+        n.isPrime()
+    }
+
+    func resetAllFields() {
+        #warning("Implement a reset of all published and calculated values")
     }
 
     func calcN() {
-        guard let p = Int(p),
-              let q = Int(q) else { return }
+        guard let p = BigInt(p),
+              let q = BigInt(q) else { return }
+
+        resetAllFields()
 
         n = String(p * q)
     }
 
     func calcR() {
-        guard let p = Int(p),
-              let q = Int(q) else { return }
+        guard let p = BigInt(p),
+              let q = BigInt(q) else { return }
 
         r = String((p - 1) * (q - 1))
     }
 
     func calcKVals() {
-        guard let r = Int(r) else { return }
+        guard let r = BigInt(r) else { return }
         kValues = []
         keyPairs = []
 
+        #warning("BUG - Missing a lot of key pairs after chainging this to BigInt")
         computeKeyPairs(r: r, maxKey: MaxKey)
 
         for pair in keyPairs {
@@ -71,34 +75,33 @@ final class RSACalculatorViewModel : ObservableObject {
         d = String(keyPairs[index].1)
     }
 
-    #warning("Might be redundant -- consider removing")
-    func rgcd(a: Int, b: Int) -> Int {
-        if b == 0 { return a }
-        return rgcd(a: b, b: a % b)
+    func calcC() {
+        /// `c = m^e mod n`
+        guard let m = BigInt(mInput),
+              let e = BigInt(e),
+              let n = BigInt(n) else { return }
+
+        c = String(m.power(e, modulus: n))
     }
 
-    func modInverse(a: Int, m: Int) -> Int? {
-        let tmp = a % m
-        for i in 1..<m {
-            if (tmp * i % m == 1) {
-                return i;
-            }
-        }
-        return nil
+    func calcM() {
+        /// `m = c^d mod n`
+        guard let c = BigInt(c),
+              let d = BigInt(d),
+              let n = BigInt(n) else { return }
+
+        mOutput = String(c.power(d, modulus: n))
     }
 
-    func validateFactors(_ e: Int, _ d: Int, _ r: Int) -> Bool {
+    func validateFactors(_ e: BigInt, _ d: BigInt, _ r: BigInt) -> Bool {
         guard e > 1 && e < r else { return false }
         guard d > 1 else { return false }
-        #warning("rgcd checks might be redundant")
-        guard rgcd(a: e, b: r) == 1 else { return false }
-        guard rgcd(a: d, b: r) == 1 else { return false }
         return true
     }
 
-    func computeKeyPairs(r: Int, maxKey: Int) {
-        for d in 2...maxKey {
-            if let e = modInverse(a: d, m: r) {
+    func computeKeyPairs(r: BigInt, maxKey: BigInt) {
+        for e in 2...maxKey {
+            if let d = e.inverse(r) {
                 if validateFactors(e, d, r) {
                     keyPairs.append((e, d))
                 }

@@ -23,8 +23,7 @@ struct StepFour: View {
 
         Button(
             action: {
-                //                viewModel.calcN()
-                //                viewModel.calcR()
+                viewModel.calcM()
             },
             label: {
                 Text("Decrypt c") }

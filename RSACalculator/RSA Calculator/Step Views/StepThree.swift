@@ -36,8 +36,8 @@ struct StepThree: View {
 
         Button(
             action: {
-                //                viewModel.calcN()
-                //                viewModel.calcR()
+                #warning("Add checks to validate that c can be calculated")
+                viewModel.calcC()
             },
             label: {
                 Text("Encrypt m") }
