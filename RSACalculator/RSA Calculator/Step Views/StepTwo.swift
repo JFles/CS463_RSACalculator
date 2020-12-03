@@ -31,7 +31,6 @@ struct StepTwo: View {
         ///     - such that `e * d == 1 mod r`
         ///
 
-        #warning("Consider breaking the formula out into a separate Text")
         MessageHeader(message: "Private key, d, is a positive integer which is a cofactor of K and must be coprime to r and satisfy `e * d == 1 mod r`")
 
         ValueLabel(label: "d", input: $viewModel.d)

@@ -89,7 +89,6 @@ final class RSACalculatorViewModel : ObservableObject {
         kValues = []
         keyPairs = []
 
-        #warning("BUG - Missing a lot of key pairs after chainging this to BigInt")
         computeKeyPairs(r: r, maxKey: MaxKey)
 
         for pair in keyPairs {

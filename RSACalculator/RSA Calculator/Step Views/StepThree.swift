@@ -37,7 +37,6 @@ struct StepThree: View {
 
         Button(
             action: {
-                #warning("Add checks to validate that c can be calculated")
                 if viewModel.validateM() {
                     viewModel.calcC()
                 } else {
