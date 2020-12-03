@@ -15,11 +15,11 @@ The app starts by prompting the user to enter two unique prime numbers. Afterwar
 
 
 ## Screenshots
-![Screen 1](images/Screen1.png)
+![Screen 1](/images/Screen1.png)
 
-![Screen 2](images/Screen2.png)
+![Screen 2](/images/Screen2.png)
 
-![Screen 3](images/Screen3.png)
+![Screen 3](/images/Screen3.png)
 
 
 ## Conclusion
