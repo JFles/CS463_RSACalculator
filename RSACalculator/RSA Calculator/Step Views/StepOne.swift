@@ -20,6 +20,8 @@ struct StepOne: View {
 
         StepHeader(step: "Step 1")
 
+        MessageHeader(message: "Enter two different prime numbers")
+
         LabeledValueEntry(label: "Prime p:", placeholder: "Enter a prime number", input: $viewModel.p)
 
         LabeledValueEntry(label: "Prime q:", placeholder: "Enter a prime number", input: $viewModel.q)
@@ -42,7 +44,7 @@ struct StepOne: View {
             label: {
                 Text("Calculate N and r") }
         ).alert(isPresented: $showingAlert) {
-            Alert(title: Text("Non-prime number detected!"), message: Text("Try entering a prime number for both p and q"), dismissButton: .default(Text("OK")))
+            Alert(title: Text("Incorrect input detected!"), message: Text("Try entering a different prime number for both p and q"), dismissButton: .default(Text("OK")))
         }
         .padding()
 
@@ -98,12 +100,14 @@ struct SelectKSection: View {
         }.padding()
 
         if !viewModel.kValues.isEmpty {
-            Picker("Select K Value", selection: $selectedK, content: {
+            Picker("Select K Value", selection: $selectedK) {
                 ForEach(0..<viewModel.kValues.count) { index in
                     Text(viewModel.kValues[index])
                         .tag(index)
                 }
-            }).pickerStyle(MenuPickerStyle())
+            }
+            .onChange(of: selectedK) { _ in viewModel.clearKeyFields() }
+            .pickerStyle(MenuPickerStyle())
             .padding()
         }
 

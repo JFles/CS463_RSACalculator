@@ -9,6 +9,7 @@ import SwiftUI
 
 struct StepThree: View {
     @ObservedObject var viewModel: RSACalculatorViewModel
+    @State private var showingAlert = false
 
     var body: some View {
         StepHeader(step: "Step 3")
@@ -37,11 +38,18 @@ struct StepThree: View {
         Button(
             action: {
                 #warning("Add checks to validate that c can be calculated")
-                viewModel.calcC()
+                if viewModel.validateM() {
+                    viewModel.calcC()
+                } else {
+                    showingAlert = true
+                }
+                UIApplication.shared.endEditing()
             },
             label: {
                 Text("Encrypt m") }
-        )
+        ).alert(isPresented: $showingAlert, content: {
+            Alert(title: Text("Invalid message detected!"), message: Text("Please type a number greater than 1 and less than N"), dismissButton: .default(Text("OK")))
+        })
         .padding()
 
         ValueLabel(label: "c", input: $viewModel.c)

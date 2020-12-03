@@ -11,16 +11,21 @@ import BigInt
 let MaxKey: BigInt = 100
 
 final class RSACalculatorViewModel : ObservableObject {
-    #warning("Can these be changed to an int type?")
-    @Published var p = ""
-    @Published var q = ""
+    @Published var p = "" {
+        didSet { if oldValue != p { clearAllFields() } }
+    }
+    @Published var q = "" {
+        didSet { if oldValue != q { clearAllFields() } }
+    }
     @Published var n = "?"
     @Published var r = "?"
     @Published var kValues = [String]()
     private var keyPairs = [(BigInt, BigInt)]()
     @Published var e = "?"
     @Published var d = "?"
-    @Published var mInput = ""
+    @Published var mInput = "" {
+        didSet { if oldValue != mInput { clearMFields() } }
+    }
     @Published var mOutput = "?"
     @Published var c = "?"
 
@@ -29,22 +34,45 @@ final class RSACalculatorViewModel : ObservableObject {
         guard let p = BigInt(p),
               let q = BigInt(q) else { return false }
 
-        return isPrime(p) && isPrime(q)
+        return isPrime(p) && isPrime(q) && p != q
     }
 
     func isPrime(_ n: BigInt) -> Bool {
         n.isPrime()
     }
 
-    func resetAllFields() {
-        #warning("Implement a reset of all published and calculated values")
+    func validateM() -> Bool {
+        guard let m = Int(mInput),
+              let n = Int(n) else { return false }
+        if m > 1 && m < n {
+            return true
+        }
+        return false
+    }
+
+    func clearAllFields() {
+        n = "?"
+        r = "?"
+        kValues = [String]()
+        keyPairs = [(BigInt, BigInt)]()
+        clearKeyFields()
+        mInput = ""
+        clearMFields()
+    }
+
+    func clearKeyFields() {
+        e = "?"
+        d = "?"
+    }
+
+    func clearMFields() {
+        mOutput = "?"
+        c = "?"
     }
 
     func calcN() {
         guard let p = BigInt(p),
               let q = BigInt(q) else { return }
-
-        resetAllFields()
 
         n = String(p * q)
     }
@@ -93,18 +121,10 @@ final class RSACalculatorViewModel : ObservableObject {
         mOutput = String(c.power(d, modulus: n))
     }
 
-    func validateFactors(_ e: BigInt, _ d: BigInt, _ r: BigInt) -> Bool {
-        guard e > 1 && e < r else { return false }
-        guard d > 1 else { return false }
-        return true
-    }
-
     func computeKeyPairs(r: BigInt, maxKey: BigInt) {
-        for e in 2...maxKey {
-            if let d = e.inverse(r) {
-                if validateFactors(e, d, r) {
-                    keyPairs.append((e, d))
-                }
+        for d in 2...maxKey {
+            if let e = d.inverse(r) {
+                keyPairs.append((e, d))
             }
         }
     }
