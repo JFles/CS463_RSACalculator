@@ -13,6 +13,21 @@
 4. Select a simulator (or physical device) in top left device selection
 5. Press `play` button in top left to build and run the app
 
+## TestFlight Public Beta Link
+### Requirements
+- iPhone or iPad running iOS/iPadOS 14.0 or later
+
+### Steps
+1. Visit link provided
+2. Install TestFlight
+3. Launch TestFlight
+4. Tap Redeem in TestFlight
+5. Redeem RSA Calculator app
+6. Install RSA Calculator app
+7. Enjoy!
+
+### Link
+https://testflight.apple.com/join/mpYoNBAa
 
 ## Notes
 Long term, I am hoping to get a TestFlight approval from Apple to send a public testing link for reviewers to test the app in its deployed state. Since I'm at the mercy of Apple for an approval at the moment, the next best thing would be to pull the project down and build it through XCode on a macOS computer.
