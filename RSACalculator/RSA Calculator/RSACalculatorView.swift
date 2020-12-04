@@ -26,5 +26,6 @@ struct RSACalculatorView: View {
 struct RSACalculatorView_Previews: PreviewProvider {
     static var previews: some View {
         RSACalculatorView(viewModel: RSACalculatorViewModel())
+//            .environment(\.colorScheme, .dark)
     }
 }
