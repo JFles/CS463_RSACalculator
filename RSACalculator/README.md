@@ -29,8 +29,3 @@
 ### Link
 https://testflight.apple.com/join/mpYoNBAa
 
-## Notes
-Long term, I am hoping to get a TestFlight approval from Apple to send a public testing link for reviewers to test the app in its deployed state. Since I'm at the mercy of Apple for an approval at the moment, the next best thing would be to pull the project down and build it through XCode on a macOS computer.
-
-If I'm able to get a TestFlight public link, I'll update this README with that information
-
